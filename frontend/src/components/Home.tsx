@@ -33,9 +33,9 @@ export const Home = () => {
   const handleChange = (e: any) => {
     setQuery(e.target.value);
   };
-  
+
   const handleEnter = (e: any) => {
-    if(e.key === 'Enter'){
+    if (e.key === "Enter") {
       retrieveItems();
     }
   };
@@ -47,7 +47,7 @@ export const Home = () => {
       </div>
 
       <div className="row d-flex justify-content-center align-items-center animate__animated animate__fadeIn">
-        <div className="col-md-8">
+        <div className="col-11">
           <div className="search">
             <FontAwesomeIcon icon={faSearch} />
 
@@ -61,7 +61,7 @@ export const Home = () => {
                 onKeyPress={handleEnter}
               />
 
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-custom">
                 Search
               </button>
             </form>
@@ -69,11 +69,23 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="row pt-5 pb-5">
-        {items.map((item) => {
-          return <Item key={item.id} {...item} />;
-        })}
+      <div className="movies-library">
+        {items.length ? (
+          items.map((item) => {
+            return <Item key={item.id} {...item} />;
+          })
+        ) : (
+          <p className="text-center">Search not found</p>
+        )}
       </div>
+
+      <footer className="footer footerMod">
+        <div className="container text-center">
+          <span className="text-muted">
+            COPYRIGHT - BY CARLOS PALOMINO - VERTRICAL CODING CHALLENGE
+          </span>
+        </div>
+      </footer>
     </>
   );
 };

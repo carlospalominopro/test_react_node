@@ -1,37 +1,53 @@
 import React, { useState } from "react";
 import { ItemDetail } from "./ItemDetail";
 
-
 export const Item = (item: any) => {
-    
-    const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
+  const random = (1 + Math.random() * (100 - 1)).toFixed(0);
 
   return (
     <>
-      <div className="row no-gutters justify-content-center mt-2">
-        <div className="card col-10">
-            <div className="row p-3">
-              <div className="col-md-2">
-                <img src={ ('/images/' + item.photo) } className="card-img img-fluid photo" alt="photo" 
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src="logo192.png";
-                }} />
+      <div className="card animate__animated animate__fadeInUp">
+        <a href="#">
+          <img
+            onClick={() => setModalShow(true)}
+            src={"/images/" + item.photo}
+            width="150px"
+            height="200px"
+            alt="cover"
+            className="cover"
+          />
+        </a>
 
-              </div>
-              <div className="col-md-10">
-                <div className="card-body">
-                  <h5 className="card-title"><a className="customTittle" onClick={() => setModalShow(true)}>{item.title}</a></h5>
-                  <p className="card-text">{item.shortDescription}</p>
-                </div>
-              </div>
+        <div className="hero">
+          <div className="details">
+            <div className="title1" onClick={() => setModalShow(true)}>
+              {item.title}
             </div>
+
+            <fieldset className="rating">
+              <div className="Stars"> </div>
+            </fieldset>
+
+          </div>
+        </div>
+
+        <div className="description">
+          <div className="column2">
+            <p>
+              {item.shortDescription}
+              <ItemDetail
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                keyboard={false}
+                backdrop="static"
+                data={item}
+              />
+            </p>
+          </div>
         </div>
       </div>
-
-      <ItemDetail show={modalShow} onHide={() => setModalShow(false)} keyboard={false} backdrop='static' data={item} />
-
     </>
   );
 };
